@@ -1,28 +1,26 @@
 import './App.css'
+import SmartBook from './components/Title_Component/Title_Card'
+import SearchCard from './components/Search_Component/Search_Card'
+import HistoryCard from './components/History_Component/History_Card'
 
 function App() {
   return (
     <div className="layout">
       <header className="site-header"> 
-        <h1>Mi aplicación</h1>
+        <SmartBook />
       </header>
 
       <div className="site-body">
         <aside className="sidebar">
-          <nav>
-            <ul>
-              <li>Inicio</li>
-              <li>Libros</li>
-              <li>Usuarios</li>
-              <li>Configuración</li>
-            </ul>
-          </nav>
+          <div className="sidebar-content">
+            <SearchCard />
+            <HistoryCard />
+          </div>
+          <div className="sidebar-bottom-space" />
         </aside>
 
         <main className="main">
           <section className="content">
-            <h2>Contenido principal</h2>
-            <p>Aquí va el contenido de la página.</p>
           </section>
         </main>
       </div>

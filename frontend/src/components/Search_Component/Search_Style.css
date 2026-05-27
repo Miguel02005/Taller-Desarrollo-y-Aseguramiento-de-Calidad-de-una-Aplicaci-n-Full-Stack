@@ -1,0 +1,111 @@
+.search-card {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.07);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.search-card_header {
+  margin-bottom: 16px;
+}
+
+.search-card_header h2 {
+  margin: 0 0 4px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.search-card_header p {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.search-card_form {
+  display: grid;
+  gap: 12px;
+}
+
+.search-card_label {
+  display: grid;
+  gap: 5px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.search-card_input,
+.search-card_select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 9px 13px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  background: #f8fafc;
+  color: #0f172a;
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.search-card_input::placeholder {
+  color: #94a3b8;
+}
+
+.search-card_input:focus,
+.search-card_select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+  background: #ffffff;
+}
+
+.search-card_select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+  cursor: pointer;
+}
+
+.search-card_button {
+  width: 100%;
+  padding: 11px 16px;
+  margin-top: 2px;
+  border: none;
+  border-radius: 12px;
+  background: #1e40af;
+  color: white;
+  font-size: 0.92rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  letter-spacing: 0.01em;
+  transition: background 0.18s ease, transform 0.12s ease, box-shadow 0.18s ease;
+  box-shadow: 0 2px 8px rgba(30, 64, 175, 0.28);
+}
+
+.search-card_button::before {
+  content: '🔍';
+  font-size: 0.85rem;
+}
+
+.search-card_button:hover {
+  background: #1d3a9e;
+  box-shadow: 0 4px 14px rgba(30, 64, 175, 0.38);
+}
+
+.search-card_button:active {
+  transform: scale(0.98);
+}
