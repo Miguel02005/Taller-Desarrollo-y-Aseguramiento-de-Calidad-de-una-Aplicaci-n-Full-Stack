@@ -249,3 +249,11 @@
     display: none; /* ocultar por defecto en móvil, quitar si se desea */
   }
 }
+
+.main {
+  flex: 1 1 auto;
+  padding: 24px;
+  background: var(--main-bg, #ffffff);
+  overflow-y: auto;
+  height: 100vh;
+}

@@ -1,5 +1,7 @@
 import './App.css'
 
+import BookGrid from './components/BookGrid/BookGrid'
+
 function App() {
   return (
     <div className="layout">
@@ -21,8 +23,7 @@ function App() {
 
         <main className="main">
           <section className="content">
-            <h2>Contenido principal</h2>
-            <p>Aquí va el contenido de la página.</p>
+            <BookGrid />
           </section>
         </main>
       </div>
