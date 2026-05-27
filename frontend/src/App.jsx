@@ -3,6 +3,8 @@ import SmartBook from './components/Title_Component/Title_Card'
 import SearchCard from './components/Search_Component/Search_Card'
 import HistoryCard from './components/History_Component/History_Card'
 
+import BookGrid from './components/BookGrid/BookGrid'
+
 function App() {
   return (
     <div className="layout">
@@ -21,6 +23,7 @@ function App() {
 
         <main className="main">
           <section className="content">
+            <BookGrid />
           </section>
         </main>
       </div>
