@@ -16,10 +16,15 @@ function BookCard({ title, author, year, editions, image, favorited = false }) {
   return (
     <div className="book-card">
       <div className="book-cover">
-        {image
-          ? <img src={image} alt={title} />
-          : <div className="book-cover-placeholder">📚</div>
-        }
+        {image ? (
+          <img src={image} alt={title} />
+        ) : (
+          <div className="book-cover-fallback">
+            <span className="fallback-title">{title}</span>
+            <span className="fallback-author">{author}</span>
+          </div>
+        )}
+
         <button
           className={`fav-btn ${isFav ? 'active' : ''}`}
           onClick={() => setIsFav(prev => !prev)}
