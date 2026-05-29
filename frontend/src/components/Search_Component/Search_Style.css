@@ -81,7 +81,7 @@
   margin-top: 2px;
   border: none;
   border-radius: 12px;
-  background: #1e40af;
+  background: #0b2145;
   color: white;
   font-size: 0.92rem;
   font-weight: 600;
@@ -108,4 +108,20 @@
 
 .search-card_button:active {
   transform: scale(0.98);
+}
+
+.search-card_button:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.search-error {
+  padding: 10px 12px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  color: #dc2626;
+  font-size: 0.82rem;
+  text-align: center;
 }

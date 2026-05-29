@@ -1,59 +1,181 @@
-import { useState, useEffect } from 'react'
-import BookCard from '../BookCard/BookCard'
-import './BookGrid.css'
+import { useEffect, useState } from 'react';
+import { useSearch } from '../../context/SearchContext.jsx';
+import BookCard from '../BookCard/BookCard.jsx';
+import './BookGrid.css';
 
 function BookGrid() {
-  const [books, setBooks] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+    const { books, loading, error, hasSearched } = useSearch();
 
-  useEffect(() => {
-    const fetchBooks = async () => {
-      try {
-        setLoading(true)
-        const res = await fetch(
-          'https://openlibrary.org/search.json?q=literatura+latinoamericana&limit=8&lang=spa',
-          {
-            headers: {
-              'User-Agent': 'SmartBookFinder (contacto@ejemplo.com)'
+    const [featuredBooks, setFeaturedBooks] = useState([]);
+    const [featuredLoading, setFeaturedLoading] = useState(true);
+    const [featuredError, setFeaturedError] = useState(null);
+
+    // Libros por defecto cuando no se ha buscado
+    useEffect(() => {
+        if (hasSearched) return;
+
+        const fetchFeaturedBooks = async () => {
+            try {
+                setFeaturedLoading(true);
+
+                const res = await fetch(
+                    'https://openlibrary.org/search.json?q=literatura+latinoamericana&limit=12&lang=spa',
+                    {
+                        headers: {
+                            'User-Agent':
+                                'SmartBookFinder (contacto@ejemplo.com)',
+                        },
+                    }
+                );
+
+                if (!res.ok) {
+                    throw new Error(
+                        'Error al obtener libros destacados'
+                    );
+                }
+
+                const data = await res.json();
+
+                const mapped = data.docs.map((book) => ({
+                    id: book.key,
+
+                    workKey: book.key,
+
+                    title: book.title,
+
+                    author:
+                        book.author_name?.[0] ||
+                        'Autor desconocido',
+
+                    publishYear:
+                        book.first_publish_year || '—',
+
+                    editions:
+                        book.edition_count || 1,
+
+                    coverUrl: book.cover_i
+                        ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`
+                        : null,
+                }));
+
+                setFeaturedBooks(mapped);
+            } catch (err) {
+                setFeaturedError(err.message);
+            } finally {
+                setFeaturedLoading(false);
             }
-          }
-        )
-        if (!res.ok) throw new Error('Error al obtener los libros')
-        const data = await res.json()
+        };
 
-        const mapped = data.docs.map(book => ({
-          id: book.key,
-          title: book.title,
-          author: book.author_name?.[0] ?? 'Autor desconocido',
-          year: book.first_publish_year ?? '—',
-          editions: book.edition_count ?? 1,
-          image: book.cover_i
-            ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`
-            : null,
-        }))
+        fetchFeaturedBooks();
+    }, [hasSearched]);
 
-        setBooks(mapped)
-      } catch (err) {
-        setError(err.message)
-      } finally {
-        setLoading(false)
-      }
+    // =========================================
+    // LIBROS POR DEFECTO
+    // =========================================
+
+    if (!hasSearched) {
+        if (featuredLoading) {
+            return (
+                <p className="grid-status">
+                    Cargando libros recomendados...
+                </p>
+            );
+        }
+
+        if (featuredError) {
+            return (
+                <div className="books-grid-error">
+                    <p className="grid-status grid-error">
+                        Error: {featuredError}
+                    </p>
+                </div>
+            );
+        }
+
+        return (
+            <div>
+                <div className="grid-header">
+                    <h2>Libros Recomendados</h2>
+
+                    <p>
+                        Explora algunos libros populares mientras
+                        realizas una búsqueda.
+                    </p>
+                </div>
+
+                <div className="books-grid">
+                    {featuredBooks.map((book) => (
+                        <BookCard
+                            key={book.id}
+                            workKey={book.workKey}
+                            id={book.id}
+                            title={book.title}
+                            author={book.author}
+                            publishYear={book.publishYear}
+                            editions={book.editions}
+                            coverUrl={book.coverUrl}
+                        />
+                    ))}
+                </div>
+            </div>
+        );
     }
 
-    fetchBooks()
-  }, [])
+    // =========================================
+    // BÚSQUEDAS NORMALES
+    // =========================================
 
-  if (loading) return <p className="grid-status">Cargando libros...</p>
-  if (error)   return <p className="grid-status grid-error">Error: {error}</p>
+    if (loading) {
+        return (
+            <p className="grid-status">
+                Buscando libros...
+            </p>
+        );
+    }
 
-  return (
-    <div className="books-grid">
-      {books.map(book => (
-        <BookCard key={book.id} {...book} />
-      ))}
-    </div>
-  )
+    if (error) {
+        return (
+            <div className="books-grid-error">
+                <p className="grid-status grid-error">
+                    Error: {error}
+                </p>
+            </div>
+        );
+    }
+
+    if (books.length === 0) {
+        return (
+            <div className="books-grid-empty">
+                <div className="empty-state">
+                    <span className="empty-icon">🔍</span>
+
+                    <h3>Sin resultados</h3>
+
+                    <p>
+                        No se encontraron libros con los
+                        criterios de búsqueda.
+                    </p>
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <div className="books-grid">
+            {books.map((book) => (
+                <BookCard
+                    key={book.id}
+                    workKey={book.workKey}
+                    id={book.id}
+                    title={book.title}
+                    author={book.author}
+                    publishYear={book.publishYear}
+                    editions={book.editions}
+                    coverUrl={book.coverUrl}
+                />
+            ))}
+        </div>
+    );
 }
 
-export default BookGrid
+export default BookGrid;

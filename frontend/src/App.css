@@ -2,6 +2,14 @@
   box-sizing: border-box;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  min-height: 100vh;
+}
 
 .layout {
   display: flex;
@@ -12,34 +20,34 @@
   font-family: 'Segoe UI', system-ui, sans-serif;
 }
 
+/* HEADER */
 .site-header {
   background: #ffffff;
   color: #0f2d5e;
   padding: 0 32px;
-  height: 60px;
+  height: 70px;
   display: flex;
   align-items: center;
   position: sticky;
   top: 0;
   z-index: 100;
   border-bottom: 1px solid #e2e8f0;
-  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.06);
+  box-shadow: 0 1px 6px rgba(15, 23, 42, 0.06);
 }
 
+/* BODY */
 .site-body {
   display: flex;
-  flex: 1 1 auto;
-  gap: 0;
-  background: #ffffff;
-  padding: 0;
+  flex: 1;
+  background: #f1f5f9;
 }
 
+/* SIDEBAR */
 .sidebar {
-  width: 280px;
-  min-width: 280px;
-  background: transparent;
+  width: 300px;
+  min-width: 300px;
+  background: #f8fafc;
   padding: 24px 16px 32px;
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -47,28 +55,30 @@
 }
 
 .sidebar-content {
-  background: transparent;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
 }
 
 .sidebar-bottom-space {
   min-height: 60px;
 }
 
+/* MAIN CONTENT */
 .main {
-  flex: 1 1 auto;
-  padding: 28px 32px;
+  flex: 1;
+  padding: 32px;
   background: #f1f5f9;
   overflow-y: auto;
 }
 
 .content {
-  max-width: 960px;
+  width: 100%;
+  max-width: 1450px;
   margin: 0 auto;
 }
 
+/* FOOTER */
 .site-footer {
   background: #0f172a;
   color: #94a3b8;
@@ -78,15 +88,18 @@
   letter-spacing: 0.02em;
 }
 
+/* SEARCH CARD */
 .search-card {
   padding: 20px !important;
   border-radius: 18px !important;
 }
 
+/* RESPONSIVE */
 @media (max-width: 768px) {
   .site-body {
     flex-direction: column;
   }
+
   .sidebar {
     width: 100%;
     min-width: unset;
@@ -94,12 +107,8 @@
     border-bottom: 1px solid rgba(148, 163, 184, 0.2);
     padding: 20px 16px;
   }
-}
 
-.main {
-  flex: 1 1 auto;
-  padding: 24px;
-  background: var(--main-bg, #ffffff);
-  overflow-y: auto;
-  height: 100vh;
+  .main {
+    padding: 20px;
+  }
 }

@@ -173,3 +173,28 @@
   color: rgba(212, 175, 95, 0.85);
   text-align: center;
 }
+
+.fav-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.fav-message {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    white-space: nowrap;
+    z-index: 3;
+    animation: fadeInOut 2s ease-in-out;
+}
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0; }
+    10%, 90% { opacity: 1; }
+}

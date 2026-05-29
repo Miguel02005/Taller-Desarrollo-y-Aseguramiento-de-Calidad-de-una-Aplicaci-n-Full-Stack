@@ -11,3 +11,55 @@
   font-size: 15px;
 }
 .grid-error { color: #e74c3c; }
+
+.books-grid-empty,
+.books-grid-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.07);
+  max-width: 400px;
+}
+
+.empty-icon {
+  font-size: 48px;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.empty-state h3 {
+  margin: 0 0 8px;
+  color: #0f172a;
+  font-size: 1.25rem;
+}
+
+.empty-state p {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.grid-header {
+  margin-bottom: 20px;
+}
+
+.grid-header h2 {
+  margin: 0 0 6px;
+  font-size: 1.5rem;
+  color: #0f172a;
+}
+
+.grid-header p {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.95rem;
+}
