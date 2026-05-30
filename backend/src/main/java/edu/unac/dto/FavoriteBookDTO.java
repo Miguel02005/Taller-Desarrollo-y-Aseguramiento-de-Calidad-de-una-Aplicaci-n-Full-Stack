@@ -1,26 +1,17 @@
-package edu.unac.domain;
+package edu.unac.dto;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "favorite_books")
-public class FavoriteBook {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class FavoriteBookDTO {
     private Long id;
-
     private String bookKey;
     private String title;
     private String author;
-
     private Integer publishYear;
-    private Integer editions;
     private String coverUrl;
 }

@@ -163,6 +163,7 @@
   line-height: 1.4;
   display: -webkit-box;
   -webkit-line-clamp: 4;
+  line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -192,9 +193,4 @@
     white-space: nowrap;
     z-index: 3;
     animation: fadeInOut 2s ease-in-out;
-}
-
-@keyframes fadeInOut {
-    0%, 100% { opacity: 0; }
-    10%, 90% { opacity: 1; }
 }

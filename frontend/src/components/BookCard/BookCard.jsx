@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { addFavorite, removeFavorite, getFavorites } from '../../services/favoriteService.js';
+import { useState } from 'react';
+import { useFavorites } from '../../context/FavoritesContext.jsx';
 import './BookCard.css';
 
 function HeartIcon() {
@@ -21,51 +21,16 @@ function BookCard({
     coverUrl,
     image,
 }) {
-    const bookOpenLibraryKey = workKey;
-    const bookId = id;
+    const { addFavorite, removeFavorite, isFavorite, getFavoriteId } = useFavorites();
 
     const publicationYear = publishYear || year || '—';
     const bookCoverUrl = coverUrl || image;
 
-    const [isFav, setIsFav] = useState(false);
-    const [favoriteId, setFavoriteId] = useState(null);
     const [loading, setLoading] = useState(false);
     const [showMessage, setShowMessage] = useState(null);
-    const [favoriteCheckDone, setFavoriteCheckDone] = useState(false);
 
-    useEffect(() => {
-        let cancelled = false;
-
-        const checkFavorite = async () => {
-            if (!bookOpenLibraryKey) {
-                setFavoriteCheckDone(true);
-                return;
-            }
-
-            try {
-                const favorites = await getFavorites();
-                if (cancelled) return;
-
-                const existing = favorites.find(fav => fav.bookKey === bookOpenLibraryKey);
-                if (existing) {
-                    setIsFav(true);
-                    setFavoriteId(existing.id);
-                }
-            } catch (err) {
-                console.error('Error checking favorite status:', err);
-            } finally {
-                if (!cancelled) {
-                    setFavoriteCheckDone(true);
-                }
-            }
-        };
-
-        checkFavorite();
-
-        return () => {
-            cancelled = true;
-        };
-    }, [bookOpenLibraryKey]);
+    const bookIsFav = isFavorite(workKey);
+    const bookFavoriteId = getFavoriteId(workKey);
 
     const showTemporaryMessage = (message) => {
         setShowMessage(message);
@@ -73,22 +38,18 @@ function BookCard({
     };
 
     const handleToggleFavorite = async () => {
-        if (!bookOpenLibraryKey) {
+        if (!workKey) {
             showTemporaryMessage('No se puede guardar este libro');
             return;
         }
 
         setLoading(true);
         try {
-            if (isFav && favoriteId) {
-                await removeFavorite(favoriteId);
-                setIsFav(false);
-                setFavoriteId(null);
+            if (bookIsFav && bookFavoriteId) {
+                await removeFavorite(bookFavoriteId);
                 showTemporaryMessage('Eliminado de favoritos');
             } else {
-                const newFavorite = await addFavorite(bookOpenLibraryKey);
-                setIsFav(true);
-                setFavoriteId(newFavorite.id);
+                await addFavorite(workKey);
                 showTemporaryMessage('Agregado a favoritos');
             }
         } catch (err) {
@@ -112,10 +73,10 @@ function BookCard({
                 )}
 
                 <button
-                    className={`fav-btn ${isFav ? 'active' : ''}`}
+                    className={`fav-btn ${bookIsFav ? 'active' : ''}`}
                     onClick={handleToggleFavorite}
-                    disabled={loading || !favoriteCheckDone}
-                    title={isFav ? 'Eliminar de favoritos' : 'Agregar a favoritos'}
+                    disabled={loading}
+                    title={bookIsFav ? 'Eliminar de favoritos' : 'Agregar a favoritos'}
                 >
                     <HeartIcon />
                 </button>

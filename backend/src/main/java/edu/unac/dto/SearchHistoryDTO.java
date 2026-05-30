@@ -1,29 +1,19 @@
-package edu.unac.domain;
+package edu.unac.dto;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "search_history")
-public class SearchHistory {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class SearchHistoryDTO {
     private Long id;
-
     private String title;
     private String author;
-
     private String language;
     private Integer publishedAfter;
     private LocalDateTime searchDate;
-    
 }
-
