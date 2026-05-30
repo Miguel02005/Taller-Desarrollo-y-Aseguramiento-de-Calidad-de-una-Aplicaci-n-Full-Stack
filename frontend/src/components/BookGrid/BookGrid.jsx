@@ -3,6 +3,15 @@ import { useSearch } from '../../context/SearchContext.jsx';
 import BookCard from '../BookCard/BookCard.jsx';
 import './BookGrid.css';
 
+// TODO: Remove these debug logs after fixing the issue
+const DEBUG_MODE = true;
+
+function log(message, data) {
+    if (DEBUG_MODE) {
+        console.log(`[BookGrid] ${message}`, data);
+    }
+}
+
 function EmptyIcon() {
     return (
         <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -18,6 +27,15 @@ function LoaderIcon() {
             <div className="loader-spinner" />
             <span>Buscando libros...</span>
         </div>
+    );
+}
+
+function BookStackIcon() {
+    return (
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+        </svg>
     );
 }
 
@@ -150,6 +168,10 @@ function BookGrid() {
             </div>
         );
     }
+
+    log('Books state received:', books);
+    log('Books is array:', Array.isArray(books));
+    log('Books length:', books ? books.length : 'null/undefined');
 
     if (books.length === 0) {
         return (

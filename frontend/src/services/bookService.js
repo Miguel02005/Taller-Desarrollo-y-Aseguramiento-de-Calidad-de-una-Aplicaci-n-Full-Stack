@@ -15,7 +15,15 @@ export async function searchBooks({ title, author, language, publishedAfter } = 
     if (language) params.append('language', language);
     if (publishedAfter) params.append('publishedAfter', publishedAfter);
 
-    return api(`/api/books/search?${params.toString()}`);
+    console.log('[bookService] Request URL:', `/api/books/search?${params.toString()}`);
+
+    const result = await api(`/api/books/search?${params.toString()}`);
+
+    console.log('[bookService] Raw response from API:', result);
+    console.log('[bookService] Response type:', typeof result);
+    console.log('[bookService] Is array:', Array.isArray(result));
+
+    return result;
 }
 
 export default { searchBooks };

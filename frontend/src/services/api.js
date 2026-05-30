@@ -9,6 +9,8 @@ async function apiRequest(endpoint, options = {}) {
     const path = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
     const url = `${API_BASE_URL}${path}`;
 
+    console.log('[api.js] Making request to:', url);
+
     const defaultHeaders = {
         'Content-Type': 'application/json',
     };
@@ -24,6 +26,8 @@ async function apiRequest(endpoint, options = {}) {
     try {
         const response = await fetch(url, config);
 
+        console.log('[api.js] Response status:', response.status);
+
         if (!response.ok) {
             let errorData;
             try {
@@ -36,7 +40,9 @@ async function apiRequest(endpoint, options = {}) {
 
         const contentType = response.headers.get('content-type');
         if (contentType && contentType.includes('application/json')) {
-            return await response.json();
+            const data = await response.json();
+            console.log('[api.js] JSON response:', data);
+            return data;
         }
         return null;
 

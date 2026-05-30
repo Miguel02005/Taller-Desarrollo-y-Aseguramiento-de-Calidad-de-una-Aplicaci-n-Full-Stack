@@ -3,6 +3,8 @@ import { searchBooks } from '../services/bookService.js';
 
 const SearchContext = createContext(null);
 
+console.log('[SearchContext] Module loaded');
+
 export function SearchProvider({ children }) {
     const [books, setBooks] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -10,14 +12,20 @@ export function SearchProvider({ children }) {
     const [hasSearched, setHasSearched] = useState(false);
 
     const performSearch = useCallback(async (searchParams) => {
+        console.log('[SearchContext] performSearch called with params:', searchParams);
         setLoading(true);
         setError(null);
 
         try {
+            console.log('[SearchContext] Calling searchBooks API...');
             const results = await searchBooks(searchParams);
+            console.log('[SearchContext] API returned:', results);
+            console.log('[SearchContext] Results type:', typeof results, Array.isArray(results) ? 'array' : 'not array');
+            console.log('[SearchContext] Results length:', results ? results.length : 'null/undefined');
             setBooks(results || []);
             setHasSearched(true);
         } catch (err) {
+            console.error('[SearchContext] Error during search:', err);
             setError(err.message);
             setBooks([]);
             setHasSearched(true);
