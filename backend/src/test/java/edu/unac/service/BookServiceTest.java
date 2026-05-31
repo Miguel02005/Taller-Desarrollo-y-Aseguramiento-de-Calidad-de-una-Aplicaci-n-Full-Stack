@@ -1,10 +1,8 @@
-package services;
+package edu.unac.service;
 
 import edu.unac.exception.InvalidSearchException;
 import edu.unac.external.BookResponseDTO;
 import edu.unac.external.OpenLibraryClient;
-import edu.unac.service.BookService;
-import edu.unac.service.SearchHistoryService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

@@ -1,8 +1,7 @@
-package services;
+package edu.unac.service;
 
 import edu.unac.domain.SearchHistory;
 import edu.unac.repository.SearchHistoryRepository;
-import edu.unac.service.SearchHistoryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
