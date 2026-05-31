@@ -1,6 +1,6 @@
 package edu.unac.controller;
 
-import edu.unac.dto.BookResponseDTO;
+import edu.unac.external.BookResponseDTO;
 import edu.unac.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

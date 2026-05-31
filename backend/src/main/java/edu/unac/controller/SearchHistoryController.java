@@ -1,6 +1,6 @@
 package edu.unac.controller;
 
-import edu.unac.dto.SearchHistoryDTO;
+import edu.unac.domain.SearchHistory;
 import edu.unac.service.SearchHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +15,8 @@ public class SearchHistoryController {
     private SearchHistoryService service;
 
     @GetMapping
-    public List<SearchHistoryDTO> getHistory() {
-        return service.getAllSearchesDTO();
+    public List<SearchHistory> getHistory() {
+        return service.getAllSearches();
     }
 
     @DeleteMapping

@@ -1,7 +1,6 @@
 package edu.unac.controller;
 
 import edu.unac.domain.FavoriteBook;
-import edu.unac.dto.FavoriteBookDTO;
 import edu.unac.service.FavoriteBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,13 +15,13 @@ public class FavoriteBookController {
     private FavoriteBookService service;
 
     @GetMapping
-    public List<FavoriteBookDTO> getFavorites() {
-        return service.getAllFavoritesDTO();
+    public List<FavoriteBook> getFavorites() {
+        return service.getAllFavorites();
     }
 
     @PostMapping
-    public FavoriteBookDTO saveFavorite(@RequestParam String key) {
-        return service.saveFavoriteDTO(key);
+    public FavoriteBook saveFavorite(@RequestParam String key) {
+        return service.saveFavorite(key);
     }
 
     @DeleteMapping("/{id}")

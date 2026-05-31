@@ -3,7 +3,7 @@ package edu.unac.service;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import edu.unac.dto.BookResponseDTO;
+import edu.unac.external.BookResponseDTO;
 import edu.unac.exception.InvalidSearchException;
 import edu.unac.external.OpenLibraryClient;
 
