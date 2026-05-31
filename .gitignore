@@ -4,3 +4,4 @@ tests-frontend/test-results/
 tests-frontend/playwright-report/
 tests-frontend/blob-report/
 tests-frontend/.cache/
+tests-frontend/tests/reports/
