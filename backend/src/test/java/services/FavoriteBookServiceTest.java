@@ -1,8 +1,9 @@
-package edu.unac.service;
+package services;
 
 import edu.unac.domain.FavoriteBook;
 import edu.unac.external.OpenLibraryClient;
 import edu.unac.repository.FavoriteBookRepository;
+import edu.unac.service.FavoriteBookService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
