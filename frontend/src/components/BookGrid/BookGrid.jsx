@@ -29,6 +29,15 @@ function LoaderIcon() {
     );
 }
 
+function BookStackIcon() {
+    return (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+        </svg>
+    );
+}
+
 
 function BookGrid() {
     const { books, loading, error, hasSearched } = useSearch();
@@ -164,7 +173,9 @@ function BookGrid() {
     log('Books is array:', Array.isArray(books));
     log('Books length:', books ? books.length : 'null/undefined');
 
-    if (books.length === 0) {
+    const safeBooks = books || [];
+
+    if (safeBooks.length === 0) {
         return (
             <div className="book-grid-container">
                 <div className="book-grid-empty">
@@ -189,13 +200,13 @@ function BookGrid() {
                 <div>
                     <h1 className="book-grid-title">Resultados</h1>
                     <p className="book-grid-subtitle">
-                        {books.length} {books.length === 1 ? 'libro encontrado' : 'libros encontrados'}
+                        {safeBooks.length} {safeBooks.length === 1 ? 'libro encontrado' : 'libros encontrados'}
                     </p>
                 </div>
             </div>
 
             <div className="books-grid">
-                {books.map((book) => (
+                {safeBooks.map((book) => (
                     <BookCard
                         key={book.id}
                         workKey={book.workKey}

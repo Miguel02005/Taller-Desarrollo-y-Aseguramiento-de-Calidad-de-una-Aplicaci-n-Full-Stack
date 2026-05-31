@@ -22,7 +22,7 @@ export function SearchProvider({ children }) {
             console.log('[SearchContext] API returned:', results);
             console.log('[SearchContext] Results type:', typeof results, Array.isArray(results) ? 'array' : 'not array');
             console.log('[SearchContext] Results length:', results ? results.length : 'null/undefined');
-            setBooks(results || []);
+            setBooks(Array.isArray(results) ? results : []);
             setHasSearched(true);
         } catch (err) {
             console.error('[SearchContext] Error during search:', err);

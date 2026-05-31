@@ -23,7 +23,9 @@ function BookCard({
 }) {
     const { addFavorite, removeFavorite, isFavorite, getFavoriteId } = useFavorites();
 
-    const publicationYear = publishYear || year || '—';
+    const safeTitle = title || 'Título desconocido';
+    const safeAuthor = author || 'Autor desconocido';
+    const publicationYear = publishYear || year || null;
     const bookCoverUrl = coverUrl || image;
 
     const [loading, setLoading] = useState(false);
@@ -64,11 +66,11 @@ function BookCard({
         <div className="book-card">
             <div className="book-cover">
                 {bookCoverUrl ? (
-                    <img src={bookCoverUrl} alt={title} loading="lazy" />
+                    <img src={bookCoverUrl} alt={safeTitle} loading="lazy" />
                 ) : (
                     <div className="book-cover-fallback">
-                        <span className="fallback-title">{title}</span>
-                        <span className="fallback-author">{author || 'Autor desconocido'}</span>
+                        <span className="fallback-title">{safeTitle}</span>
+                        <span className="fallback-author">{safeAuthor}</span>
                     </div>
                 )}
 
@@ -87,10 +89,10 @@ function BookCard({
             </div>
 
             <div className="book-info">
-                <div className="book-title" title={title}>{title}</div>
-                <div className="book-author">{author || 'Autor desconocido'}</div>
+                <div className="book-title" title={safeTitle}>{safeTitle}</div>
+                <div className="book-author">{safeAuthor}</div>
                 <div className="book-meta">
-                    <span className="book-year">Publicado: {publicationYear}</span>
+                    <span className="book-year">Publicado: {publicationYear || '—'}</span>
                     {editions > 0 && (
                         <span className="book-editions">{editions} Ediciones</span>
                     )}
