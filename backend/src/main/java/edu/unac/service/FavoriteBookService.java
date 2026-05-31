@@ -37,7 +37,7 @@ public class FavoriteBookService {
             favorite.setTitle(book.path("title").asText("Título desconocido"));
 
             JsonNode authors = book.path("authors");
-            if (authors != null && authors.isArray() && !authors.isEmpty()) {
+            if (authors.isArray() && !authors.isEmpty()) {
                 JsonNode firstAuthor = authors.get(0);
                 if (firstAuthor.has("key")) {
                     try {
@@ -53,7 +53,7 @@ public class FavoriteBookService {
             }
 
             JsonNode covers = book.path("covers");
-            if (covers != null && covers.isArray() && covers.size() > 0) {
+            if (covers.isArray() && covers.size() > 0) {
                 favorite.setCoverUrl(
                         "https://covers.openlibrary.org/b/id/" + covers.get(0).asInt() + "-M.jpg"
                 );
