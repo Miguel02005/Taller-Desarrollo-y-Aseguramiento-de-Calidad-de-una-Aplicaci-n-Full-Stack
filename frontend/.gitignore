@@ -29,3 +29,10 @@ dist-ssr
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+# Tests frontend
+tests-frontend/node_modules
+tests-frontend/reports
+tests-frontend/*.json
+tests-frontend/*.html
+tests-frontend/package-lock.json

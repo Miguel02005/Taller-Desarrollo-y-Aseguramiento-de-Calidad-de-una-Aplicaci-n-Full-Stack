@@ -1,0 +1,6 @@
+# Tests frontend
+tests-frontend/node_modules/
+tests-frontend/test-results/
+tests-frontend/playwright-report/
+tests-frontend/blob-report/
+tests-frontend/.cache/
