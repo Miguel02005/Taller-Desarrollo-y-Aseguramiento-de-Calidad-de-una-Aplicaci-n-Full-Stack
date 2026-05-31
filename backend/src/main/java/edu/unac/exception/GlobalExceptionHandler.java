@@ -1,12 +1,9 @@
-package edu.unac.controller;
+package edu.unac.exception;
 
-import edu.unac.exception.InvalidSearchException;
-import edu.unac.exception.NotEnoughResultsException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Map;
 
